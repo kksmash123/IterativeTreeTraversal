@@ -19,14 +19,47 @@ struct Node
 
 queue<Node*> q;
 stack<Node*> s;
+stack<Node*> hs;
+
+
 
 
 struct Node* CreateNode(int);
 struct Node* createTree(int);
 
+void iterativeInorder(struct Node* );
+void iterativePreorder(struct Node* );
+void iterativePostorder(struct Node* );
+
+
 //function definitions
 
+void iterativePostorder(struct Node* root)
+{ 
+   
+    while(root )
+    {
+        hs.push(root);
+        if (root->lc)
+            s.push(root->lc);
+        if (root->rc)
+            s.push(root->rc);
+        if (!s.empty())
+        {
+            root = s.top();
+            s.pop();
+        }
+        else
+            root = NULL;
+    }
 
+    while (!hs.empty())
+    {
+        cout << hs.top()->data << " ";
+        hs.pop();
+    }
+
+}
 
 void iterativeInorder(struct Node* root)
 {
@@ -131,5 +164,7 @@ int main()
     iterativeInorder(T1root);
     cout << endl;
     iterativePreorder(T1root);
+    cout << endl;
+    iterativePostorder(T1root);
 
 }
