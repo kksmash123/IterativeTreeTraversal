@@ -27,12 +27,32 @@ stack<Node*> hs;
 struct Node* CreateNode(int);
 struct Node* createTree(int);
 
+
 void iterativeInorder(struct Node* );
 void iterativePreorder(struct Node* );
 void iterativePostorder(struct Node* );
 
 
 //function definitions
+
+void iterativeLevelOrder(struct Node* root)
+{
+    q.push(root);
+
+    while (!q.empty())
+    {
+        if (root->lc)
+            q.push(root->lc);
+        if (root->rc)
+            q.push(root->rc);
+
+        cout << q.front()->data << " ";
+        q.pop();
+        if(!q.empty())root = q.front();
+    }
+
+}
+
 
 void iterativePostorder(struct Node* root)
 { 
@@ -79,8 +99,6 @@ void iterativeInorder(struct Node* root)
         }
     }
 }
-
-
 
 void iterativePreorder(struct Node* root)
 {
@@ -166,5 +184,7 @@ int main()
     iterativePreorder(T1root);
     cout << endl;
     iterativePostorder(T1root);
+    cout << endl;
+    iterativeLevelOrder(T1root);
 
 }
